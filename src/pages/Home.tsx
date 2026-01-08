@@ -4,13 +4,17 @@ import { api } from "../../convex/_generated/api";
 import { PostCard } from "../components/PostCard";
 import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
+import { useMutation } from "convex/react";
 import { useUser, SignInButton, SignUpButton, SignOutButton } from "@clerk/clerk-react";
+import { SignedIn } from "@clerk/clerk-react";
 
 export default function Home() {
   const [randomKey, setRandomKey] = useState(0);
   const [lastPostId, setLastPostId] = useState<Id<"posts"> | undefined>(
     undefined
   );
+  const [newPost, setNewPost] = useState("");
+  const createPost = useMutation(api.posts.createPost);
 
   const { user } = useUser();
 
@@ -49,10 +53,29 @@ export default function Home() {
             </p>
           )}
         </AnimatePresence>
+          <SignedIn>
+            {isAdmin ? (
+              <div className="mb-6">
+                <textarea
+                  value={newPost}
+                  onChange={e => setNewPost(e.target.value)}
+                  placeholder="Новый пост..."
+                  className="w-full border rounded p-2"
+                />
+                <button
+                  onClick={() => {
+                    if (!newPost.trim()) return;
+                    createPost({ content: newPost });
+                    setNewPost("");
+                  }}
+                  className="mt-2 px-4 py-2 bg-black text-white rounded"
+                >
+                  ➕ Добавить пост
+                </button>
+              </div>
+            ) : null}
+          </SignedIn>
 
-        {isAdmin && (
-        <button>➕ Создать пост (админ)</button>
-      )}
 
         <div className="mt-6 flex justify-center">
           <button

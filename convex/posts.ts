@@ -10,19 +10,6 @@ export const getAllPosts = query({
   },
 });
 
-export const createPostAdmin = mutation({
-  args: {
-    content: v.string(),
-  },
-  handler: async (ctx, { content }) => {
-    await assertAdmin(ctx);
-    await ctx.db.insert("posts", {
-      content,
-      createdAt: Date.now(),
-    });
-  },
-});
-
 export const updatePost = mutation({
   args: {
     postId: v.id("posts"),
@@ -73,11 +60,11 @@ export const createPost = mutation({
   args: {
     content: v.string(),
   },
-  handler: async (ctx, args) => {
-    await assertAdmin(ctx); // 🔐 проверка админа
+  handler: async (ctx, { content }) => {
+    await assertAdmin(ctx);
 
     await ctx.db.insert("posts", {
-      content: args.content,
+      content,
       createdAt: Date.now(),
     });
   },
