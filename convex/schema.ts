@@ -15,5 +15,10 @@ export default defineSchema({
     postId: v.id("posts"),
     text: v.string(),
     createdAt: v.number(),
-  }),
+  }).index("by_post", ["postId"]),
+
+  users: defineTable({
+    email: v.string(),
+    role: v.union(v.literal("admin"), v.literal("user")),
+  }).index("by_email", ["email"]),
 });

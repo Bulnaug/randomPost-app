@@ -10,6 +10,7 @@ export function Admin() {
   const createPost = useMutation(api.posts.createPostAdmin);
   const updatePost = useMutation(api.posts.updatePost);
   const deleteComment = useMutation(api.comments.deleteCommentAdmin);
+  const deletePost = useMutation(api.posts.deletePost);
 
   const [newPost, setNewPost] = useState("");
   const [editingPostId, setEditingPostId] =
@@ -80,6 +81,19 @@ export function Admin() {
                     className="px-3 py-1 border rounded"
                   >
                     ✏️ Редактировать
+                  </button>
+                  <button
+                    onClick={async () => {
+                        if (!confirm("Удалить пост навсегда?")) return;
+
+                        await deletePost({
+                        postId: post._id,
+                        adminKey,
+                        });
+                    }}
+                    className="text-red-600 hover:underline"
+                    >
+                    Удалить
                   </button>
                 </>
               )}

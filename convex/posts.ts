@@ -1,13 +1,6 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
-
-const ADMIN_KEY = process.env.ADMIN_KEY;
-
-function assertAdmin(adminKey?: string) {
-  if (!adminKey || adminKey !== ADMIN_KEY) {
-    throw new Error("Unauthorized");
-  }
-}
+import { assertAdmin } from "./auth";
 
 /* === ADMIN === */
 
@@ -20,11 +13,10 @@ export const getAllPosts = query({
 export const createPostAdmin = mutation({
   args: {
     content: v.string(),
-    adminKey: v.string(),
   },
-  handler: async ({ db }, { content, adminKey }) => {
-    assertAdmin(adminKey);
-    await db.insert("posts", {
+  handler: async (ctx, { content }) => {
+    await assertAdmin(ctx);
+    await ctx.db.insert("posts", {
       content,
       createdAt: Date.now(),
     });
@@ -35,13 +27,24 @@ export const updatePost = mutation({
   args: {
     postId: v.id("posts"),
     content: v.string(),
-    adminKey: v.string(),
   },
-  handler: async ({ db }, { postId, content, adminKey }) => {
-    assertAdmin(adminKey);
-    await db.patch(postId, { content });
+  handler: async (ctx, { postId, content }) => {
+    await assertAdmin(ctx);
+    await ctx.db.patch(postId, { content });
   },
 });
+
+export const deletePost = mutation({
+  args: {
+    postId: v.id("posts"),
+  },
+  handler: async (ctx, { postId }) => {
+    await assertAdmin(ctx);
+    await ctx.db.delete(postId);
+  },
+});
+
+/* === PUBLIC === */
 
 export const getRandomPost = query({
   args: {
@@ -55,7 +58,6 @@ export const getRandomPost = query({
       posts = posts.filter(post => post._id !== excludePostId);
     }
 
-    // fallback, если остался 0 или 1 пост
     if (posts.length === 0) {
       posts = await db.query("posts").collect();
     }

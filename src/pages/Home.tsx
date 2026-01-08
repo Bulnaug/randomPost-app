@@ -4,8 +4,9 @@ import { api } from "../../convex/_generated/api";
 import { PostCard } from "../components/PostCard";
 import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
+import { useUser, SignInButton, SignUpButton, SignOutButton } from "@clerk/clerk-react";
 
-export function Home() {
+export default function Home() {
   const [randomKey, setRandomKey] = useState(0);
   const [lastPostId, setLastPostId] = useState<Id<"posts"> | undefined>(
     undefined
@@ -18,10 +19,14 @@ export function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+       
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-6">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Random Post
         </h1>
+        <div>
+          <a href="/admin">Login</a>
+        </div>
 
         <AnimatePresence mode="wait">
           {post ? (
@@ -53,3 +58,4 @@ export function Home() {
     </div>
   );
 }
+
