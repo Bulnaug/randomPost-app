@@ -70,10 +70,14 @@ export const getRandomPost = query({
 });
 
 export const createPost = mutation({
-  args: { content: v.string() },
-  handler: async ({ db }, { content }) => {
-    await db.insert("posts", {
-      content,
+  args: {
+    content: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await assertAdmin(ctx); // 🔐 проверка админа
+
+    await ctx.db.insert("posts", {
+      content: args.content,
       createdAt: Date.now(),
     });
   },

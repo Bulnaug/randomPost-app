@@ -1,23 +1,22 @@
-import { MutationCtx, QueryCtx } from "./_generated/server";
+import { ConvexError } from "convex/values";
+import { QueryCtx, MutationCtx } from "./_generated/server";
+
+type Ctx = QueryCtx | MutationCtx;
 
 type PublicMetadata = {
   role?: "admin" | "user";
 };
 
-export async function assertAdmin(
-  ctx: MutationCtx | QueryCtx
-) {
+export async function assertAdmin(ctx: Ctx) {
   const identity = await ctx.auth.getUserIdentity();
 
   if (!identity) {
-    throw new Error("Not authenticated");
+    throw new ConvexError("Not authenticated");
   }
 
-  const metadata = identity.publicMetadata as PublicMetadata | null;
+  const publicMetadata = identity.publicMetadata as PublicMetadata | undefined;
 
-  if (metadata?.role !== "admin") {
-    throw new Error("Unauthorized");
+  if (publicMetadata?.role !== "admin") {
+    throw new ConvexError("Not an admin");
   }
-
-  return identity;
 }
