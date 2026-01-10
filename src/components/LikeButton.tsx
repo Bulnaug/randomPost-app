@@ -17,7 +17,12 @@ export function LikeButton({ postId }: Props) {
     <div className="flex items-center gap-3">
       <button
         onClick={() => likePost({ postId })}
-        className="px-4 py-2 bg-red-500 text-white rounded-xl"
+        className="px-5 py-2
+              rounded-full
+              border
+              text-sm
+              text-gray-600
+              hover:bg-gray-100"
       >
         ❤️ Лайк
       </button>
