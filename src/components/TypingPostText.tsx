@@ -1,0 +1,77 @@
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+type Props = {
+  text: string;
+  sound?: boolean;
+};
+
+export function TypingPostText({ text, sound = true }: Props) {
+  const [displayed, setDisplayed] = useState("");
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio("/type.mp3");
+    audioRef.current.volume = 0.15;
+  }, []);
+
+  useEffect(() => {
+    let i = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const typeNext = () => {
+      const char = text[i];
+      setDisplayed(prev => prev + char);
+
+      if (sound && char !== " " && char !== "\n") {
+        audioRef.current?.play();
+      }
+
+      i++;
+
+      if (i < text.length) {
+        let delay = 35;
+
+        if (",;".includes(char)) delay = 200;
+        if (".!?…".includes(char)) delay = 450;
+        if (char === "\n") delay = 600;
+
+        timeout = setTimeout(typeNext, delay);
+      }
+    };
+
+    setDisplayed("");
+    typeNext();
+
+    return () => clearTimeout(timeout);
+  }, [text, sound]);
+
+  // мигание курсора
+  useEffect(() => {
+    const blink = setInterval(() => {
+      setCursorVisible(v => !v);
+    }, 500);
+
+    return () => clearInterval(blink);
+  }, []);
+
+  return (
+    <div className="font-serif text-xl leading-loose text-gray-900 whitespace-pre-wrap">
+      {displayed}
+      <AnimatePresence>
+        {cursorVisible && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="inline-block ml-0.5"
+          >
+            ▍
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
