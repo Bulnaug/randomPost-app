@@ -36,7 +36,7 @@ export function TypingPostText({ text, sound = true }: Props) {
 
         if (",;".includes(char)) delay = 50;
         if (".!?…".includes(char)) delay = 100;
-        if (char === "\n") delay = 600;
+        if (char === "\n") delay = 300;
 
         timeout = setTimeout(typeNext, delay);
       }

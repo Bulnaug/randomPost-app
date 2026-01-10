@@ -36,3 +36,11 @@ export const getAllPostIds = query({
     }));
   },
 });
+
+
+export const getPostById = query({
+  args: { id: v.id("posts") },
+  handler: async (ctx, { id }) => {
+    return await ctx.db.get(id);
+  },
+});
