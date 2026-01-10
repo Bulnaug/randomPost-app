@@ -1,35 +1,5 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
-import { assertAdmin } from "./auth";
-
-/* === ADMIN === */
-
-export const getAllPosts = query({
-  handler: async ({ db }) => {
-    return await db.query("posts").order("desc").collect();
-  },
-});
-
-export const updatePost = mutation({
-  args: {
-    postId: v.id("posts"),
-    content: v.string(),
-  },
-  handler: async (ctx, { postId, content }) => {
-    await assertAdmin(ctx);
-    await ctx.db.patch(postId, { content });
-  },
-});
-
-export const deletePost = mutation({
-  args: {
-    postId: v.id("posts"),
-  },
-  handler: async (ctx, { postId }) => {
-    await assertAdmin(ctx);
-    await ctx.db.delete(postId);
-  },
-});
 
 /* === PUBLIC === */
 
@@ -53,19 +23,5 @@ export const getRandomPost = query({
 
     const randomIndex = Math.floor(Math.random() * posts.length);
     return posts[randomIndex];
-  },
-});
-
-export const createPost = mutation({
-  args: {
-    content: v.string(),
-  },
-  handler: async (ctx, { content }) => {
-    await assertAdmin(ctx);
-
-    await ctx.db.insert("posts", {
-      content,
-      createdAt: Date.now(),
-    });
   },
 });
