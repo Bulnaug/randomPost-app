@@ -18,16 +18,31 @@ export function PostCard({ post }: Props) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.98 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
+      className="
+        bg-white 
+        rounded-2xl 
+        shadow-lg 
+        px-8 py-10 
+        max-w-2xl 
+        w-full
+      " 
     >
-      <p className="text-gray-800 text-center text-lg mb-6">
-        {post.content}
+      <p className="text-xl md:text-2xl leading-relaxed whitespace-pre-line">
+        {post.content.split("\n").map((line, i) => (
+          <span
+            key={i}
+            className={line.trim().startsWith("—") ? "block ml-4 text-gray-700" : "block"}
+          >
+            {line}
+          </span>
+        ))}
       </p>
 
-      <div className="flex justify-center mb-4">
+      {/* <div className="flex justify-center mb-4 whitespace-pre-line">
         <LikeButton postId={post._id} />
       </div>
 
-      <Comments postId={post._id} />
+      <Comments postId={post._id} /> */}
     </motion.div>
   );
 }

@@ -25,3 +25,14 @@ export const getRandomPost = query({
     return posts[randomIndex];
   },
 });
+
+
+export const getAllPostIds = query({
+  handler: async ({ db }) => {
+    const posts = await db.query("posts").collect();
+    return posts.map((p, index) => ({
+      id: p._id,
+      index,
+    }));
+  },
+});
