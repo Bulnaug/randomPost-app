@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
 import { LikeButton } from "../components/LikeButton";
 import { Comments } from "../components/Comments";
-import { UserPanel } from "../components/UserPanel";
 
 
 export default function Home() {

@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
-import { AnimatedPostText } from "./AnimatedPostText";
 import { TypingPostText } from "./TypingPostText";
 
 type Props = {

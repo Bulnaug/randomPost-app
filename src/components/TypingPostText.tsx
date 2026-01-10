@@ -32,10 +32,10 @@ export function TypingPostText({ text, sound = true }: Props) {
       i++;
 
       if (i < text.length) {
-        let delay = 35;
+        let delay = 15;
 
-        if (",;".includes(char)) delay = 200;
-        if (".!?…".includes(char)) delay = 450;
+        if (",;".includes(char)) delay = 50;
+        if (".!?…".includes(char)) delay = 100;
         if (char === "\n") delay = 600;
 
         timeout = setTimeout(typeNext, delay);
@@ -52,7 +52,7 @@ export function TypingPostText({ text, sound = true }: Props) {
   useEffect(() => {
     const blink = setInterval(() => {
       setCursorVisible(v => !v);
-    }, 500);
+    }, 300);
 
     return () => clearInterval(blink);
   }, []);
