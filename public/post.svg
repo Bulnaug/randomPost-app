@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="32" cy="32" r="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+  <!-- Eyes -->
+  <circle cx="22" cy="24" r="4" fill="#333"/>
+  <circle cx="42" cy="24" r="4" fill="#333"/>
+  <!-- Mustache -->
+  <path d="M20 36 Q32 44 44 36" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+  <!-- Smile -->
+  <path d="M20 44 Q32 50 44 44" stroke="#FF4500" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>
