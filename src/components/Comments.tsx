@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { type KeyboardEvent } from 'react'
 
 type Props = {
   postId: Id<"posts">;
@@ -15,6 +16,13 @@ export function Comments({ postId }: Props) {
   });
 
   const addComment = useMutation(api.comments.addComment);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && text.trim()) {
+      addComment({ postId, text });
+      setText(""); // Очищаем поле
+    }
+  }
 
   return (
     <div className="mt-6">
@@ -41,6 +49,7 @@ export function Comments({ postId }: Props) {
         <input
           value={text}
           onChange={e => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Написать комментарий..."
           className="flex-1 border rounded-xl px-3 py-2 text-sm"
         />
