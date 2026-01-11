@@ -17,10 +17,13 @@ export function PostCard({ post }: Props) {
   return (
     <div className="relative bg-white rounded-2xl p-8 shadow-sm max-w-prose mx-auto">
       <TypingPostText text={post.content} sound/>
-      <LikeButton
-        postId={post._id}
-        likes={likes}
-      />
+      {/* UI-футер карточки */}
+      <div className="mt-6 flex items-center">
+        <LikeButton
+          postId={post._id}
+          likes={post.likes ?? 0}
+        />
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { HeartIcon } from "./HeartIcon";
 
 type Props = {
   postId: Id<"posts">;
@@ -11,92 +12,44 @@ type Props = {
 
 export function LikeButton({ postId, likes }: Props) {
   const toggleLike = useMutation(api.posts.toggleLike);
-
   const storageKey = `liked_${postId}`;
   const [liked, setLiked] = useState(false);
-  const [burst, setBurst] = useState(false);
 
   useEffect(() => {
-    setLiked(sessionStorage.getItem(storageKey) === "true");
+    setLiked(sessionStorage.getItem(storageKey) === "1");
   }, [postId]);
 
   const onClick = async () => {
-    const nextLiked = !liked;
-
-    setLiked(nextLiked);
-    sessionStorage.setItem(storageKey, nextLiked ? "1" : "0");
-
-    if (nextLiked) {
-      setBurst(true);
-      setTimeout(() => setBurst(false), 600);
-    }
+    const next = !liked;
+    setLiked(next);
+    sessionStorage.setItem(storageKey, next ? "1" : "0");
 
     await toggleLike({
       postId,
-      delta: nextLiked ? 1 : -1,
+      delta: next ? 1 : -1,
     });
   };
 
   return (
-    <div className="absolute bottom-4 left-4">
-      {/* 💥 Взрыв */}
-      <AnimatePresence>
-        {burst &&
-          [...Array(6)].map((_, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 1, scale: 0.5, x: 0, y: 0 }}
-              animate={{
-                opacity: 0,
-                scale: 1.2,
-                x: Math.random() * 40 - 20,
-                y: Math.random() * -40 - 10,
-              }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="absolute text-red-400"
-            >
-              ♥
-            </motion.span>
-          ))}
-      </AnimatePresence>
+    <motion.button
+      onClick={onClick}
+      whileTap={{ scale: 0.95 }}
+      className="flex items-center gap-2 text-sm text-gray-600"
+    >
+      <HeartIcon liked={liked} />
 
-      {/* ❤️ Кнопка */}
-      <motion.button
-        onClick={onClick}
-        whileTap={{ scale: 1.4 }}
-        animate={{ scale: liked ? 1.2 : 1 }}
-        className="
-          flex items-center gap-1
-          text-sm text-gray-600
-          select-none
-        "
-      >
+      <AnimatePresence mode="popLayout">
         <motion.span
-          animate={{ color: liked ? "#ef4444" : "#9ca3af" }}
-          transition={{ type: "spring", stiffness: 300 }}
-          className={`
-            text-lg
-            bg-clip-text
-            text-transparent
-            ${liked
-              ? "bg-gradient-to-tr from-pink-500 via-red-500 to-orange-400"
-              : "text-gray-400"}
-          `}
-        >
-          ♥
-        </motion.span>
-
-        {/* 🔢 Счётчик */}
-        <motion.span
-          key={likes}
-          initial={{ y: 6, opacity: 0 }}
+          key={likes + (liked ? 1 : 0)}
+          initial={{ y: -6, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.25 }}
+          exit={{ y: 6, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="min-w-[1ch]"
         >
           {likes}
         </motion.span>
-      </motion.button>
-    </div>
+      </AnimatePresence>
+    </motion.button>
   );
 }
