@@ -10,13 +10,6 @@ export function TypingPostText({ text, sound = true }: Props) {
   const [displayed, setDisplayed] = useState("");
   const [cursorVisible, setCursorVisible] = useState(true);
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    audioRef.current = new Audio("/type.mp3");
-    audioRef.current.volume = 0.15;
-  }, []);
-
   useEffect(() => {
     let i = 0;
     let timeout: ReturnType<typeof setTimeout>;
@@ -24,10 +17,6 @@ export function TypingPostText({ text, sound = true }: Props) {
     const typeNext = () => {
       const char = text[i];
       setDisplayed(prev => prev + char);
-
-      if (sound && char !== " " && char !== "\n") {
-        audioRef.current?.play();
-      }
 
       i++;
 
