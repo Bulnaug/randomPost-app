@@ -4,7 +4,6 @@ import { api } from "../../convex/_generated/api";
 import { PostCard } from "../components/PostCard";
 import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
-import { LikeButton } from "../components/LikeButton";
 import { Comments } from "../components/Comments";
 
 export default function Home() {
