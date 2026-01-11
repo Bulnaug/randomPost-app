@@ -1,4 +1,4 @@
-import { query } from "./_generated/server";
+import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 /* === PUBLIC === */
@@ -40,7 +40,22 @@ export const getAllPostIds = query({
 
 export const getPostById = query({
   args: { id: v.id("posts") },
-  handler: async (ctx, { id }) => {
-    return await ctx.db.get(id);
+  handler: async ({ db }, { id }) => {
+    return await db.get(id);
+  },
+});
+
+export const toggleLike = mutation({
+  args: {
+    postId: v.id("posts"),
+    delta: v.number(), // +1 или -1
+  },
+  handler: async (ctx, { postId, delta }) => {
+    const post = await ctx.db.get(postId);
+    if (!post) return;
+
+    await ctx.db.patch(postId, {
+      likes: Math.max(0, (post.likes ?? 0) + delta),
+    });
   },
 });

@@ -19,3 +19,18 @@ export const countLikes = query({
     return likes.length;
   },
 });
+
+export const toggleLike = mutation({
+  args: {
+    postId: v.id("posts"),
+    liked: v.boolean(), // true = поставить, false = снять
+  },
+  handler: async ({ db }, { postId, liked }) => {
+    const post = await db.get(postId);
+    if (!post) return;
+
+    await db.patch(postId, {
+      likes: Math.max(0, post.likes ?? 0 + (liked ? 1 : -1)),
+    });
+  },
+});

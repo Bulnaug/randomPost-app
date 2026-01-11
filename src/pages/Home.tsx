@@ -51,20 +51,13 @@ export default function Home() {
         {/* Пост */}
         <AnimatePresence mode="wait">
           {post ? (
-            <PostCard key={post._id} post={post} />
+            <PostCard key={post._id} post={post}/>
           ) : (
             <p className="text-center text-gray-400">
               Постов пока нет
             </p>
           )}
         </AnimatePresence>
-
-        {/* Лайк */}
-        {post && (
-          <div className="mt-4 flex justify-center">
-            <LikeButton postId={post._id} />
-          </div>
-        )}
 
         {/* Комментарии */}
         {post && (

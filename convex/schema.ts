@@ -5,6 +5,7 @@ export default defineSchema({
   posts: defineTable({
     content: v.string(),
     createdAt: v.number(),
+    likes: v.optional(v.number()),
   }),
 
   likes: defineTable({
