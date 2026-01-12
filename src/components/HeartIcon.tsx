@@ -13,6 +13,8 @@ export function HeartIcon({ liked }: Props) {
       className="block"
       animate={{ scale: liked ? 1.15 : 1 }}
       transition={{ type: "spring", stiffness: 400 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 1.4 }}
     >
       <motion.path
         d="M12 21s-6.716-4.936-9.428-8.364C.91 10.35 1.253 7.108 3.343 5.515 5.302 4.05 7.846 4.36 9.514 5.995L12 8.43l2.486-2.435c1.668-1.635 4.212-1.945 6.171-.48 2.09 1.593 2.433 4.835.771 7.121C18.716 16.064 12 21 12 21z"

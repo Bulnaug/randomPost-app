@@ -61,6 +61,7 @@ export function Comments({ postId }: Props) {
             px-4 py-2
             focus:outline-none
             focus:ring-2 dark:focus:ring-blue-500/40
+            focus:ring-white/10
           "
         />
         <button

@@ -102,6 +102,7 @@ export default function Home() {
                 hover:bg-gray-100
                 dark:hover:bg-zinc-800
                 transition
+                pb-safe pt-safe
               "
             >
               ← Предыдущий
@@ -118,6 +119,7 @@ export default function Home() {
                 hover:bg-gray-100
                 dark:hover:bg-zinc-800
                 transition
+                pb-safe pt-safe
               "
             >
               🎲 Случайный
@@ -135,6 +137,7 @@ export default function Home() {
                 hover:bg-gray-100
                 dark:hover:bg-zinc-800
                 transition
+                pb-safe pt-safe
               "
             >
               Следующий →
