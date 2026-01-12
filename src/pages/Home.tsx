@@ -5,12 +5,14 @@ import { PostCard } from "../components/PostCard";
 import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
 import { Comments } from "../components/Comments";
+import { useTheme } from "../hooks/useTheme";
 
 export default function Home() {
   const allPosts = useQuery(api.posts.getAllPostIds);
   const total = allPosts?.length ?? 0;
 
   const [index, setIndex] = useState(0);
+  const { theme, setTheme } = useTheme()
 
   // корректируем индекс если постов стало меньше
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-2xl px-4">
 
         {/* Счётчик */}
@@ -46,6 +48,18 @@ export default function Home() {
             {index + 1} / {total}
           </div>
         )}
+
+        <button
+          onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+          className="
+            absolute top-4 right-4
+            p-2 rounded-full
+            bg-gray-200 dark:bg-gray-700
+            hover:scale-105 transition
+          "
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
 
         {/* Пост */}
         <AnimatePresence mode="wait">
@@ -74,6 +88,7 @@ export default function Home() {
               className="
                 px-4 py-2 rounded-full border text-sm
                 disabled:opacity-40 hover:bg-gray-100
+                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
               "
             >
               ← Предыдущий
@@ -84,6 +99,7 @@ export default function Home() {
               className="
                 px-5 py-2 rounded-full border text-sm
                 hover:bg-gray-100
+                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
               "
             >
               🎲 Случайный
@@ -95,6 +111,7 @@ export default function Home() {
               className="
                 px-4 py-2 rounded-full border text-sm
                 disabled:opacity-40 hover:bg-gray-100
+                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
               "
             >
               Следующий →

@@ -54,6 +54,11 @@ export function LikeButton({ postId, likes }: Props) {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 6, opacity: 0 }}
         transition={{ duration: 0.2 }}
+        className="
+          text-sm
+          text-gray-600
+          dark:text-zinc-400
+        "
       >
         {likes}
       </motion.span>

@@ -47,7 +47,7 @@ export function TypingPostText({ text, sound = true }: Props) {
   }, []);
 
   return (
-    <div className="font-serif text-xl leading-loose text-gray-900 whitespace-pre-wrap">
+    <div className="font-serif text-xl leading-loose text-gray-900 dark:text-zinc-200 whitespace-pre-wrap">
       {displayed}
       <AnimatePresence>
         {cursorVisible && (

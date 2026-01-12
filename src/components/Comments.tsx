@@ -26,7 +26,7 @@ export function Comments({ postId }: Props) {
 
   return (
     <div className="mt-6">
-      <h2 className="font-semibold mb-2">Комментарии</h2>
+      <h2 className="font-semibold mb-2 dark:text-zinc-200">Комментарии</h2>
 
       <div className="space-y-2 max-h-40 overflow-y-auto mb-3">
         {comments?.length ? (
@@ -39,7 +39,7 @@ export function Comments({ postId }: Props) {
             </div>
           ))
         ) : (
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-400 dark:text-zinc-200">
             Пока нет комментариев
           </p>
         )}
@@ -51,7 +51,7 @@ export function Comments({ postId }: Props) {
           onChange={e => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Написать комментарий..."
-          className="flex-1 border rounded-xl px-3 py-2 text-sm"
+          className="flex-1 border rounded-xl px-3 py-2 text-sm dark:text-zinc-200 dark:bg-zinc-900 dark:border-gray-600"
         />
         <button
           onClick={() => {
