@@ -44,7 +44,15 @@ export default function Home() {
 
         {/* Счётчик */}
         {post && (
-          <div className="mb-4 text-xs uppercase tracking-widest text-gray-400 text-center">
+          <div className="
+              mb-4
+              text-xs
+              text-zinc-400
+              text-center
+              tracking-widest
+              opacity-80
+            "
+          >
             {index + 1} / {total}
           </div>
         )}
@@ -85,10 +93,15 @@ export default function Home() {
             <button
               disabled={index === 0}
               onClick={() => setIndex(i => Math.max(0, i - 1))}
-              className="
-                px-4 py-2 rounded-full border text-sm
-                disabled:opacity-40 hover:bg-gray-100
-                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
+               className="
+                px-4 py-2
+                rounded-full
+                dark:bg-zinc-900/60
+                border border-white/5
+                text-sm dark:text-zinc-300
+                hover:bg-gray-100
+                dark:hover:bg-zinc-800
+                transition
               "
             >
               ← Предыдущий
@@ -96,10 +109,15 @@ export default function Home() {
 
             <button
               onClick={goRandom}
-              className="
-                px-5 py-2 rounded-full border text-sm
+               className="
+                px-4 py-2
+                rounded-full
+                dark:bg-zinc-900/60
+                border border-white/5
+                text-sm dark:text-zinc-300
                 hover:bg-gray-100
-                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
+                dark:hover:bg-zinc-800
+                transition
               "
             >
               🎲 Случайный
@@ -109,9 +127,14 @@ export default function Home() {
               disabled={index === total - 1}
               onClick={() => setIndex(i => Math.min(total - 1, i + 1))}
               className="
-                px-4 py-2 rounded-full border text-sm
-                disabled:opacity-40 hover:bg-gray-100
-                dark:bg-zinc-900 dark:text-zinc-200 dark:border-gray-600
+                px-4 py-2
+                rounded-full
+                dark:bg-zinc-900/60
+                border border-white/5
+                text-sm dark:text-zinc-300
+                hover:bg-gray-100
+                dark:hover:bg-zinc-800
+                transition
               "
             >
               Следующий →

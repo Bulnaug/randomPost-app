@@ -33,7 +33,7 @@ export function Comments({ postId }: Props) {
           comments.map(comment => (
             <div
               key={comment._id}
-              className="text-sm bg-gray-100 rounded-lg px-3 py-2"
+              className="text-sm rounded-lg px-3 py-2 dark:text-zinc-200"
             >
               {comment.text}
             </div>
@@ -51,7 +51,17 @@ export function Comments({ postId }: Props) {
           onChange={e => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Написать комментарий..."
-          className="flex-1 border rounded-xl px-3 py-2 text-sm dark:text-zinc-200 dark:bg-zinc-900 dark:border-gray-600"
+          className="
+            w-full
+            rounded-xl
+            dark:bg-zinc-800
+            dark:text-zinc-100
+            placeholder:text-zinc-500
+            border border-white/5
+            px-4 py-2
+            focus:outline-none
+            focus:ring-2 dark:focus:ring-blue-500/40
+          "
         />
         <button
           onClick={() => {
@@ -59,7 +69,7 @@ export function Comments({ postId }: Props) {
             addComment({ postId, text });
             setText("");
           }}
-          className="px-4 py-2 bg-black text-white rounded-xl"
+          className="px-4 py-2 bg-black text-white rounded-xl dark:bg-zinc-900/80"
         >
           ➤
         </button>

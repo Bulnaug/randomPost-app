@@ -41,7 +41,14 @@ export function LikeButton({ postId, likes }: Props) {
     <motion.button
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
-      className="relative flex items-center gap-2 text-sm text-gray-600"
+      // className="relative flex items-center gap-2 text-sm text-gray-600"
+      className="
+        flex items-center gap-2
+        px-2.5 py-1
+        rounded-full
+        dark:bg-black/30
+        backdrop-blur
+      "
     >
       <div className="relative">
         <HeartIcon liked={liked} />
@@ -56,7 +63,6 @@ export function LikeButton({ postId, likes }: Props) {
         transition={{ duration: 0.2 }}
         className="
           text-sm
-          text-gray-600
           dark:text-zinc-400
         "
       >
