@@ -28,7 +28,7 @@ export function Comments({ postId }: Props) {
     <div className="mt-6">
       <h2 className="font-medium mb-2 dark:text-zinc-200">Комментарии</h2>
 
-      <div className="space-y-2 max-h-40 overflow-y-auto mb-3">
+      <div className="space-y-2 mb-3">
         {comments?.length ? (
           comments.map(comment => (
             <div
@@ -39,7 +39,7 @@ export function Comments({ postId }: Props) {
             </div>
           ))
         ) : (
-          <p className="font-sm text-gray-400 dark:text-zinc-200">
+          <p className="font-sm text-gray-400 dark:text-zinc-500">
             Пока нет комментариев
           </p>
         )}
