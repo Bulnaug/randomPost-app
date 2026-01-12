@@ -13,7 +13,7 @@ type Props = {
 export function PostCard({ post }: Props) {
 
   return (
-    <div className="relative bg-white dark:bg-zinc-900/80 rounded-2xl p-8 shadow-sm backdrop-blur max-w-prose mx-auto">
+    <div className="relative bg-white dark:bg-zinc-900/80 rounded-2xl p-8 shadow-sm backdrop-blur mx-auto mb-8">
       <TypingPostText text={post.content} sound/>
       {/* UI-футер карточки */}
       <div className="mt-6 flex items-center">
