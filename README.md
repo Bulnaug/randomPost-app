@@ -1,6 +1,7 @@
-# 📝 Website mit Witze aus meinem Datenbank
+# 📝 Random Post App
 
-Hier wird eine zufallige witzt angezeit mit Likes und Kommentare
+Minimalistische App zum Lesen kurzer Texte
+mit Druckeffekt, Likes, Kommentaren und atmosphärischer Benutzeroberfläche.
 
 ---
 
@@ -11,18 +12,27 @@ https://random-post-app.vercel.app/
 
 ## ✨ Funktionen
 
-- ❤️ Like (mit counter)
+- 🖋 Beiträge mit Druckeffekt (typing animation)
+- ❤️ Likes mit Animation
+- - gradient SVG-Herz
+- - „Explosion“ von Herzen
+- - gleitender Zähler
+- - 1 Like pro Beitrag pro Sitzung (toggle)
 - 💬 Kommentare
-- 📝 Zufallige Witz anzeigen
+- 🌗 Dunkles/helles Design
+- 📱 Responsive
+- 🎲 Navigation
+- - nächster / vorheriger Beitrag
+- - zufälliger Beitrag
 
 ---
 
 ## 🛠️ Stack
 
-- **React**
-- **TypeScript**
+- **React + TypeScript**
 - **Vite**
 - **Tailwind CSS**
-- **framer-motion**
+- **Framer Motion**
 - **Datenbank convex**
+- **sessionStorage**
 
