@@ -7,6 +7,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { Comments } from "../components/Comments";
 import { useTheme } from "../hooks/useTheme";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { PostCounter } from "../components/PostCounter";
 
 export default function Home() {
   const allPosts = useQuery(api.posts.getAllPostIds);
@@ -45,18 +46,7 @@ export default function Home() {
 
         {/* Счётчик */}
         {post && (
-          <div className="
-              mb-4
-              text-xs
-              font-medium
-              text-zinc-400
-              text-center
-              tracking-widest
-              opacity-80
-            "
-          >
-            {index + 1} / {total}
-          </div>
+          <PostCounter index={index} total={total}/>
         )}
 
         <button
