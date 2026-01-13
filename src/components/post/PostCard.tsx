@@ -1,6 +1,6 @@
-import type { Id } from "../../convex/_generated/dataModel";
+import type { Id } from "../../../convex/_generated/dataModel";
 import { TypingPostText } from "./TypingPostText";
-import { LikeButton } from "./LikeButton";
+import { LikeButton } from "../likes/LikeButton";
 
 type Props = {
   post: {

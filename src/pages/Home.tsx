@@ -1,11 +1,11 @@
 import { AnimatePresence } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { PostCard } from "../components/PostCard";
-import { Comments } from "../components/Comments";
+import { PostCard } from "../components/post/PostCard";
+import { Comments } from "../components/comments/Comments";
 import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
-import { ThemeToggleButton } from "../components/ThemeToogleButton";
+import { ThemeToggleButton } from "../components/common/ThemeToogleButton";
 import { usePostNavigation } from "../hooks/usePostNavigation";
 import { useCurrentPost } from "../hooks/useCurrentPost";
 import { getRandomIndex } from "../utils/random";
