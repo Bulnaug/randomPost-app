@@ -1,4 +1,3 @@
-// hooks/usePostNavigation.ts
 import { useState, useEffect, useCallback } from "react";
 import type { Id } from "../../convex/_generated/dataModel";
 
@@ -6,7 +5,6 @@ export const usePostNavigation = (allPosts: { id: Id<"posts"> }[] | undefined) =
   const total = allPosts?.length ?? 0;
   const [index, setIndex] = useState(0);
 
-  // Корректируем индекс если постов стало меньше
   useEffect(() => {
     if (total > 0 && index >= total) {
       setIndex(total - 1);

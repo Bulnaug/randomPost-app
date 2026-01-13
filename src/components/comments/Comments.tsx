@@ -20,7 +20,7 @@ export function Comments({ postId }: Props) {
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && text.trim()) {
       addComment({ postId, text });
-      setText(""); // Очищаем поле
+      setText("");
     }
   }
 

@@ -28,14 +28,14 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-8">
       <div className="w-full max-w-2xl px-4">
 
-        {/* Кнопка темы */}
+        
         <ThemeToggleButton />
 
-        {/* Счётчик */}
+        
         {post && (<PostCounter index={index} total={total}/>)}
 
         
-        {/* Пост */}
+        
         <AnimatePresence mode="wait">
           {post ? (
             <PostCard key={post._id} post={post}/>
@@ -46,14 +46,14 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        {/* Комментарии */}
+        
         {post && (
           <div className="mt-4">
             <Comments postId={post._id} />
           </div>
         )}
 
-        {/* Навигация */}
+        
         {post && (
           <PostNavigator 
             index={index}
