@@ -14,16 +14,16 @@ https://random-post-app.vercel.app/
 
 - 🖋 Beiträge mit Druckeffekt (typing animation)
 - ❤️ Likes mit Animation
- - gradient SVG-Herz
- - „Explosion“ von Herzen
- - gleitender Zähler
- - 1 Like pro Beitrag pro Sitzung (toggle)
+  - gradient SVG-Herz
+  - „Explosion“ von Herzen
+  - gleitender Zähler
+  - 1 Like pro Beitrag pro Sitzung (toggle)
 - 💬 Kommentare
 - 🌗 Dunkles/helles Design
 - 📱 Responsive
 - 🎲 Navigation
- - nächster / vorheriger Beitrag
- - zufälliger Beitrag
+  - nächster / vorheriger Beitrag
+  - zufälliger Beitrag
 
 ---
 
