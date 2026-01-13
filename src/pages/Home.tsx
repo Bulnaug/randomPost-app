@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 import type { Id } from "../../convex/_generated/dataModel";
 import { Comments } from "../components/Comments";
 import { useTheme } from "../hooks/useTheme";
-import { ArrowRight, ArrowLeft } from "lucide-react";
 import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
 import { getNextIndex } from "../utils/getNextIndex";
