@@ -23,15 +23,6 @@ export const usePostNavigation = (allPosts: { id: Id<"posts"> }[] | undefined) =
     setIndex(i => Math.max(0, i - 1));
   }, []);
 
-  const goRandom = useCallback(() => {
-    if (!total) return;
-    let next = index;
-    while (next === index && total > 1) {
-      next = Math.floor(Math.random() * total);
-    }
-    setIndex(next);
-  }, [index, total]);
-
   return {
     index,
     setIndex,
@@ -39,6 +30,5 @@ export const usePostNavigation = (allPosts: { id: Id<"posts"> }[] | undefined) =
     currentId,
     goNext,
     goPrev,
-    goRandom
   };
 };

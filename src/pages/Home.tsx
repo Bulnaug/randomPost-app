@@ -1,20 +1,18 @@
-import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { PostCard } from "../components/PostCard";
-import { AnimatePresence } from "framer-motion";
 import { Comments } from "../components/Comments";
-import { useTheme } from "../hooks/useTheme";
 import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
+import { ThemeToggleButton } from "../components/ThemeToogleButton";
 import { usePostNavigation } from "../hooks/usePostNavigation";
 import { useCurrentPost } from "../hooks/useCurrentPost";
+import { getRandomIndex } from "../utils/random";
 
 export default function Home() {
   const allPosts = useQuery(api.posts.getAllPostIds);
-
-  const { theme, setTheme } = useTheme()
-
+  
   const {
     index,
     setIndex,
@@ -22,44 +20,21 @@ export default function Home() {
     currentId,
     goNext,
     goPrev,
-    goRandom
   } = usePostNavigation(allPosts);
 
-
-  // корректируем индекс если постов стало меньше
-  useEffect(() => {
-    if (total > 0 && index >= total) {
-      setIndex(total - 1);
-    }
-  }, [total, index]);
-
-  
-
   const post = useCurrentPost(currentId);
-
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-8">
       <div className="w-full max-w-2xl px-4">
 
+        {/* Кнопка темы */}
+        <ThemeToggleButton />
+
         {/* Счётчик */}
-        {post && (
-          <PostCounter index={index} total={total}/>
-        )}
+        {post && (<PostCounter index={index} total={total}/>)}
 
-        <button
-          onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
-          className="
-            absolute top-4 right-4
-            p-2 rounded-full
-            bg-gray-200 dark:bg-gray-700
-            hover:scale-105 transition
-          "
-        >
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-
+        
         {/* Пост */}
         <AnimatePresence mode="wait">
           {post ? (
@@ -85,7 +60,7 @@ export default function Home() {
             total={total}
             onNext={goNext}
             onPrev={goPrev}
-            onRandom={goRandom}
+            onRandom={() => setIndex(getRandomIndex(index, total))}
           />
         )}
       </div>
