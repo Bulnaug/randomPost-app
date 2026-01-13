@@ -8,6 +8,7 @@ import { useTheme } from "../hooks/useTheme";
 import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
 import { usePostNavigation } from "../hooks/usePostNavigation";
+import { useCurrentPost } from "../hooks/useCurrentPost";
 
 export default function Home() {
   const allPosts = useQuery(api.posts.getAllPostIds);
@@ -34,10 +35,7 @@ export default function Home() {
 
   
 
-  const post = useQuery(
-    api.posts.getPostById,
-    currentId ? { id: currentId } : "skip"
-  );
+  const post = useCurrentPost(currentId);
 
   
 
