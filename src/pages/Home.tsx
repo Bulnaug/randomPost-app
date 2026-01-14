@@ -6,6 +6,7 @@ import { Comments } from "../components/comments/Comments";
 import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
 import { ThemeToggleButton } from "../components/common/ThemeToogleButton";
+import { Footer } from "../components/layout/Footer";
 import { usePostNavigation } from "../hooks/usePostNavigation";
 import { useCurrentPost } from "../hooks/useCurrentPost";
 import { getRandomIndex } from "../utils/random";
@@ -25,7 +26,7 @@ export default function Home() {
   const post = useCurrentPost(currentId);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 pt-8 pb-[4rem]">
       <div className="w-full max-w-2xl px-4">
 
         
@@ -64,6 +65,7 @@ export default function Home() {
           />
         )}
       </div>
+       <Footer />
     </div>
   );
 }

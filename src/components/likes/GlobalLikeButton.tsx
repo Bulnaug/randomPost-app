@@ -6,14 +6,14 @@ const STORAGE_KEY = "global_like";
 
 export function GlobalLikeButton() {
   const [liked, setLiked] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(STORAGE_KEY);
     if (saved) {
-      const { liked, count } = JSON.parse(saved);
-      setLiked(liked);
-      setCount(count);
+      const data = JSON.parse(saved);
+      setLiked(data.liked);
+      setCount(data.count);
     }
   }, []);
 
@@ -33,12 +33,13 @@ export function GlobalLikeButton() {
   return (
     <motion.button
       onClick={onClick}
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.85 }}
       className="
-        inline-flex items-center gap-2
-        px-3 py-1.5
-        
-        backdrop-blur
+        flex items-center gap-1.5
+        px-2.5 py-1
+        rounded-full
+        hover:bg-black/5 dark:hover:bg-white/10
+        transition
       "
     >
       <HeartIcon liked={liked} />
@@ -47,7 +48,7 @@ export function GlobalLikeButton() {
         key={count}
         initial={{ y: -6, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="text-sm"
+        className="text-xs tabular-nums"
       >
         {count}
       </motion.span>
