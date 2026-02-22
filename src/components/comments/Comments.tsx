@@ -52,7 +52,7 @@ export function Comments({ postId }: Props) {
           value={text}
           onChange={e => setText(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Написать комментарий..."
+          placeholder={t("add comment")}
           className="
             w-full
             rounded-xl
