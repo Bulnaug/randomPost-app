@@ -1,6 +1,10 @@
 import { GlobalLikeButton } from "../likes/GlobalLikeButton";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+
+  const { t } = useTranslation();
+
   return (
     <footer
       className="
@@ -21,9 +25,9 @@ export function Footer() {
           text-gray-900 dark:text-zinc-100
         "
       >
-        <span>Спасибо "K1B"</span>
+        <span>{t("thx")} "K1B"</span>
         <GlobalLikeButton />
-        <span>за идею</span>
+        <span>{t("idea")}</span>
       </div>
     </footer>
   );

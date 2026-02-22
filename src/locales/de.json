@@ -1,0 +1,16 @@
+{
+  "dashboard": "Dashboard",
+  "createPost": "Beitrag erstellen",
+  "likes": "Gefällt mir",
+  "comments": "Kommentare",
+  "logout": "Abmelden",
+
+  "No posts yet": "Es gibt noch keine Beiträge.",
+  "No comments yet": "Noch keine Kommentare.",
+  "Comments": "Kommentare",
+  "thx": "Danke",
+  "idea": "für die Idee",
+  "previous": "Vorheriger",
+  "random": "Zufälliger",
+  "next": "Nächster"
+}

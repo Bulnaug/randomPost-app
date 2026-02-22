@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onNext: () => void;
@@ -10,6 +11,8 @@ type Props = {
 };
 
 export function PostNavigator({ onNext, onPrev, onRandom, index, total }: Props) {
+
+  const { t } = useTranslation();
 
   return (
     <div className="mt-6 flex justify-between items-center gap-4">
@@ -35,7 +38,7 @@ export function PostNavigator({ onNext, onPrev, onRandom, index, total }: Props)
               "
             >
               <ArrowLeft className="w-4 h-4 text-gray-500 dark:text-zinc-100 group-hover:-translate-x-1 transition-transform duration-200" />
-              <span className="hidden sm:inline">Предыдущий</span>
+              <span className="hidden sm:inline">{t("previous")}</span>
             </button>
 
             <button
@@ -60,7 +63,7 @@ export function PostNavigator({ onNext, onPrev, onRandom, index, total }: Props)
                 font-medium
               "
             >
-                🎲 Случайный
+                🎲 {t("random")}
             </button>
 
             <button
@@ -84,7 +87,7 @@ export function PostNavigator({ onNext, onPrev, onRandom, index, total }: Props)
                 font-medium
               "
             >
-              <span className="hidden sm:inline">Следующий</span>
+              <span className="hidden sm:inline">{t("next")}</span>
               <ArrowRight className="w-4 h-4 text-gray-500 dark:text-zinc-100 group-hover:translate-x-1 transition-transform duration-200" />
             </button>
           </div>

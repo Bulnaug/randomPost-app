@@ -7,12 +7,16 @@ import { PostCounter } from "../components/PostCounter";
 import { PostNavigator } from "../components/PostNavigation";
 import { ThemeToggleButton } from "../components/common/ThemeToogleButton";
 import { Footer } from "../components/layout/Footer";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 import { usePostNavigation } from "../hooks/usePostNavigation";
 import { useCurrentPost } from "../hooks/useCurrentPost";
 import { getRandomIndex } from "../utils/random";
 
+import { useTranslation } from "react-i18next";
+
 export default function Home() {
   const allPosts = useQuery(api.posts.getAllPostIds);
+  const { t } = useTranslation();
   
   const {
     index,
@@ -31,6 +35,7 @@ export default function Home() {
 
         
         <ThemeToggleButton />
+        <LanguageSwitcher />
 
         
         {post && (<PostCounter index={index} total={total}/>)}
@@ -42,7 +47,7 @@ export default function Home() {
             <PostCard key={post._id} post={post}/>
           ) : (
             <p className="text-center text-gray-400">
-              Постов пока нет
+              {t("No posts yet")}
             </p>
           )}
         </AnimatePresence>

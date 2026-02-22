@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { type KeyboardEvent } from 'react'
+import { useTranslation } from "react-i18next";
 
 type Props = {
   postId: Id<"posts">;
@@ -10,6 +11,7 @@ type Props = {
 
 export function Comments({ postId }: Props) {
   const [text, setText] = useState("");
+  const { t } = useTranslation();
 
   const comments = useQuery(api.comments.getComments, {
     postId,
@@ -26,7 +28,7 @@ export function Comments({ postId }: Props) {
 
   return (
     <div className="mt-6">
-      <h2 className="font-medium mb-2 dark:text-zinc-200">Комментарии</h2>
+      <h2 className="font-medium mb-2 dark:text-zinc-200">{t("Comments")}</h2>
 
       <div className="space-y-2 mb-3">
         {comments?.length ? (
@@ -40,7 +42,7 @@ export function Comments({ postId }: Props) {
           ))
         ) : (
           <p className="font-sm text-gray-400 dark:text-zinc-500">
-            Пока нет комментариев
+            {t("No comments yet")}
           </p>
         )}
       </div>
