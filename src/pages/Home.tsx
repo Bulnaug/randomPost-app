@@ -30,7 +30,7 @@ export default function Home() {
   const post = useCurrentPost(currentId);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 pt-8 pb-[4rem]">
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 pt-[4rem] pb-[4rem]">
       <div className="w-full max-w-2xl px-4">
 
         
