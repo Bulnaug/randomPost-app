@@ -1,16 +1,20 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 
 import de from "../locales/de.json";
 import ru from "../locales/ru.json";
 
+const STORAGE_KEY = "app_language";
+
+
+const savedLanguage = localStorage.getItem(STORAGE_KEY) || "ru";
+
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: "de",
-    supportedLngs: ["de", "ru"],
+    lng: savedLanguage, 
+    fallbackLng: "ru",
+    supportedLngs: ["ru", "de"],
     interpolation: {
       escapeValue: false,
     },
@@ -19,5 +23,36 @@ i18n
       ru: { translation: ru },
     },
   });
+
+i18n.on("languageChanged", (lng) => {
+  
+  localStorage.setItem(STORAGE_KEY, lng);
+
+
+  document.documentElement.lang = lng;
+
+
+  const localeMap: Record<string, string> = {
+    ru: "ru_RU",
+    de: "de_DE",
+  };
+
+  const ogLocale = localeMap[lng] || "ru_RU";
+
+  let meta = document.querySelector(
+    'meta[property="og:locale"]'
+  ) as HTMLMetaElement | null;
+
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute("property", "og:locale");
+    document.head.appendChild(meta);
+  }
+
+  meta.setAttribute("content", ogLocale);
+});
+
+
+document.documentElement.lang = savedLanguage;
 
 export default i18n;
